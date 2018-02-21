@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
+import { MarginIconComponent } from './margin-icon/margin-icon.component';
 
 @NgModule({
   imports: [
@@ -10,7 +11,7 @@ import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/mater
     MatButtonModule,
     MatIconModule
   ],
-  declarations: [ToolbarComponent],
-  exports: [ToolbarComponent]
+  declarations: [ToolbarComponent, MarginIconComponent],
+  exports: [ToolbarComponent, MarginIconComponent]
 })
 export class SharedModule { }

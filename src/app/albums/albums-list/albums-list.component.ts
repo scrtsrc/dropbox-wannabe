@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-albums-list',
+  selector: 'dwa-albums-list',
   templateUrl: './albums-list.component.html',
   styleUrls: ['./albums-list.component.css']
 })

@@ -1,7 +1,15 @@
 <mat-sidenav-container class="main-container">
-  <mat-sidenav mode="side" [opened] ="navbarOpen">Sidenav content</mat-sidenav>
+  <mat-sidenav mode="side" [opened]="navbarOpen">
+    <mat-nav-list>
+      <a *ngFor="let route of routes" mat-list-item
+         [routerLink]="route.route">
+        <dwa-margin-icon [iconName]="route.icon">
+        </dwa-margin-icon>
+        {{route.title}}</a>
+    </mat-nav-list>
+  </mat-sidenav>
   <mat-sidenav-content>
-    <app-toolbar (navToggle)="toggleNav()"></app-toolbar>
+    <dwa-toolbar (navToggle)="toggleNav()"></dwa-toolbar>
     <div style="margin-left: 10px">
       <router-outlet></router-outlet>
     </div>
