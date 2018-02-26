@@ -7,15 +7,15 @@
     <input class="w100" type="email" placeholder="Email Address" required autocomplete='off' />
     <input type="password" placeholder="Password" required />
     <input type="password" placeholder="Verify Password" required />
-    <button class="form-btn sx log-in" type="button" (click)="signIn()" >Log In</button>
+    <button class="form-btn sx back" type="button" (click)="signIn()" >Log In</button>
     <button class="form-btn dx" type="submit">Sign Me Up!</button>
   </form>
   <form class="signIn" [ngClass] = "signInClass">
     <h3>Welcome Back !</h3>
     <button class="fb" type="button">Log In With Facebook</button>
     <p>- or -</p>
-    <input type="email" placeholder="Insert eMail" autocomplete='off' required />
-    <input type="password" placeholder="Insert Password" reqired />
+    <input type="email" placeholder="Email Address" autocomplete='off' required />
+    <input type="password" placeholder="Password" reqired />
     <button class="form-btn sx back" type="button" (click)="signUp()" >Sign Up</button>
     <button class="form-btn dx" type="submit">Log In</button>
   </form>

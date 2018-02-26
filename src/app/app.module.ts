@@ -10,6 +10,7 @@ import { MarginIconComponent } from './shared/margin-icon/margin-icon.component'
 import { AuthModule } from './auth/auth.module';
 import { HomeModule } from './home/home.module';
 import { UserModule } from './user/user.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { UserModule } from './user/user.module';
     AuthModule,
     HomeModule,
     UserModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

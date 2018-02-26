@@ -1,17 +1,22 @@
-<mat-sidenav-container class="main-container">
+<mat-sidenav-container fxFlexFill>
   <mat-sidenav mode="side" [opened]="navbarOpen">
-    <mat-nav-list>
+    <mat-nav-list *ngIf="routesSet">
       <a *ngFor="let route of routes" mat-list-item
-         [routerLink]="route.route">
+         [routerLink]="route.path">
         <dwa-margin-icon [iconName]="route.icon">
         </dwa-margin-icon>
         {{route.title}}</a>
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content fxLayout="column">
     <dwa-toolbar (navToggle)="toggleNav()"></dwa-toolbar>
-    <div style="margin-left: 10px">
+    <div fxFlex>
       <router-outlet></router-outlet>
     </div>
+
+    <footer fxLayout ="column">
+      <hr fxFlexFill >
+      <p fxFlexAlign="center">- mngdnmw -</p>
+    </footer>
   </mat-sidenav-content>
 </mat-sidenav-container>
