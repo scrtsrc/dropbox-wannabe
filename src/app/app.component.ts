@@ -11,9 +11,10 @@ import { Subscription } from 'rxjs/Subscription';
 export class AppComponent implements OnDestroy {
   navbarOpen = true;
   routesSet = false;
+  mode = 'side';
   watcher: Subscription;
 
-   routes = [];
+  routes = [];
 
   constructor(private router: Router, media: ObservableMedia) {
     this.addingRoutes();
@@ -27,11 +28,13 @@ export class AppComponent implements OnDestroy {
   }
 
   loadMobileContent() {
-
+    this.navbarOpen = false;
+    this.mode = 'over';
   }
 
   loadDashboardContent() {
-
+    this.navbarOpen = true;
+    this.mode = 'side';
   }
 
   ngOnDestroy() {
@@ -56,7 +59,7 @@ export class AppComponent implements OnDestroy {
           break;
         case 2:
           route.title = 'Profile';
-          route.icon = 'account';
+          route.icon = 'face';
           break;
         default:
           route.title = 'Home';

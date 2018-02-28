@@ -5,6 +5,7 @@ import { AlbumsListComponent } from './albums/albums-list/albums-list.component'
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { FileSystemComponent } from './home/file-system/file-system.component';
+import { AuthModule } from './auth/auth.module';
 
 const routes: Routes = [
   {path: 'albums', component: AlbumsListComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AuthModule
   ],
   declarations: [],
   exports: [RouterModule]
