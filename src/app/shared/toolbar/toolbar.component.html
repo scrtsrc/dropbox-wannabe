@@ -1,10 +1,16 @@
 <mat-toolbar class="white">
-  <mat-toolbar-row>
+  <mat-toolbar-row fxLayout="row">
     <button mat-mini-fab
             color="accent"
-    (click)="toggleNav()">
+            (click)="toggleNav()">
       <mat-icon>list</mat-icon>
     </button>
-    <span style="margin-left: 10px">Custom Toolbar</span>
+    <span fxFlexOffset="10px" fxFlex>Dropbox Wannabe App</span>
+    <button mat-mini-fab
+            color="primary"
+            (click)="logout()"
+            *ngIf="isLoggedIn">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
   </mat-toolbar-row>
 </mat-toolbar>
