@@ -1,14 +1,16 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 import { Subscription } from 'rxjs/Subscription';
+import { AuthService } from './auth/shared/auth.service';
 
 @Component({
   selector: 'dwa-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnInit, OnDestroy {
+
   navbarOpen = true;
   routesSet = false;
   mode = 'side';
@@ -16,25 +18,43 @@ export class AppComponent implements OnDestroy {
 
   routes = [];
 
-  constructor(private router: Router, media: ObservableMedia) {
+  constructor(private router: Router,
+              private media: ObservableMedia,
+              private authServ: AuthService) {
+  }
+
+  ngOnInit() {
     this.addingRoutes();
-    this.watcher = media.subscribe((change: MediaChange) => {
+    this.watcher = this.media.subscribe((change: MediaChange) => {
       if (change.mqAlias === 'xs') {
         this.loadMobileContent();
       } else {
         this.loadDashboardContent();
       }
     });
+    this.authServ.isAuthenticated().subscribe(isLoggedIn => {
+      this.navbarOpen = isLoggedIn;
+    });
+
   }
 
   loadMobileContent() {
-    this.navbarOpen = false;
-    this.mode = 'over';
+    this.authServ.isAuthenticated().subscribe(isLoggedIn => {
+      if (isLoggedIn) {
+        this.navbarOpen = false;
+        this.mode = 'over';
+      }
+    });
+
   }
 
   loadDashboardContent() {
-    this.navbarOpen = true;
-    this.mode = 'side';
+    this.authServ.isAuthenticated().subscribe(isLoggedIn => {
+      if (isLoggedIn) {
+        this.mode = 'side';
+        this.navbarOpen = true;
+      }
+    });
   }
 
   ngOnDestroy() {
@@ -46,7 +66,7 @@ export class AppComponent implements OnDestroy {
   }
 
   addingRoutes() {
-    for (let i = 0; i < this.router.config.length; i++) {
+    for (let i = 0; i < this.router.config.length - 2; i++) {
       const route: any = {path: this.router.config[i].path};
       switch (i) {
         case 0:

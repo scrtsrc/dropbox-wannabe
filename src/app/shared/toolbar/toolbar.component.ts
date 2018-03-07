@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from '../../auth/shared/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'dwa-toolbar',
@@ -12,7 +13,8 @@ export class ToolbarComponent implements OnInit {
   @Output()
   navToggle = new EventEmitter();
 
-  constructor(private authServ: AuthService) {
+  constructor(private authServ: AuthService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -27,6 +29,8 @@ export class ToolbarComponent implements OnInit {
   }
 
   logout() {
-    this.authServ.logout();
+    this.authServ.logout().then(() => {
+      this.router.navigateByUrl('/login');
+    });
   }
 }

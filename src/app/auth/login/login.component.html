@@ -1,8 +1,10 @@
-<div class="container">
+<div fxLayout="row" fxLayoutAlign="center">
   <form [formGroup]="signupForm"
         class="signUp"
         [ngClass]="signUpClass"
-        novalidate>
+        (ngSubmit)="signUp()"
+        novalidate
+        fxLayout="column">
     <h3>Create Your Account</h3>
     <p>Just enter your email address
       and your password for join.
@@ -34,15 +36,19 @@
              autocomplete='off'
              formControlName="password2"/>
     </mat-form-field>
-    <button class="form-btn sx back" type="button" (click)="signIn()">Log In</button>
+    <button class="form-btn sx back" type="button" (click)="changeToSignIn()">Log In</button>
     <button class="form-btn dx" type="submit">Sign Me Up!</button>
   </form>
   <form [formGroup]="loginForm"
         class="signIn"
         [ngClass]="signInClass"
-        novalidate>
+        (ngSubmit)="signIn()"
+        novalidate
+        fxLayout="column">
     <h3>Welcome Back !</h3>
-    <button class="fb" type="button">Log In With Facebook</button>
+    <button class="fb"
+            type="button"
+    fxFlexAlign="center">Log In With Facebook</button>
     <p>- or -</p>
     <mat-form-field>
       <input
@@ -63,7 +69,8 @@
         required
         formControlName="password"/>
     </mat-form-field>
-    <button class="form-btn sx back" type="button" (click)="signUp()">Sign Up</button>
+    <!--<div *ngIf="errorLogin" style="color: red">Your email or password is incorrect!</div>-->
+    <button class="form-btn sx back" type="button" (click)="changeToSignUp()">Sign Up</button>
     <button class="form-btn dx" type="submit">Log In</button>
   </form>
 </div>
