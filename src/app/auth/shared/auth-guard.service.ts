@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuardService implements CanActivate {
 
   constructor(private authServ: AuthService,
               private router: Router) {

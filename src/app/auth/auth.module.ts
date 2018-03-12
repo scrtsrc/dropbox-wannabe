@@ -6,7 +6,8 @@ import { AuthService } from './shared/auth.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSnackBarModule } from '@angular/material';
-import { AuthGuard } from './shared/auth-guard.service';
+import { AuthGuardService } from './shared/auth-guard.service';
+import { LoggedInGuard } from './shared/logged-in.guard';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { AuthGuard } from './shared/auth-guard.service';
     MatSnackBarModule
   ],
   declarations: [LoginComponent],
-  providers: [AuthService, AuthGuard]
+  providers: [AuthService, AuthGuardService, LoggedInGuard]
 })
 export class AuthModule { }

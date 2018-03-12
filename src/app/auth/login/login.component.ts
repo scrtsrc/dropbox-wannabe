@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AuthService } from '../shared/auth.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
+import { matchPasswordValidator } from '../shared/password.validator';
+
 
 @Component({
   selector: 'dwa-login',
@@ -25,13 +26,13 @@ export class LoginComponent implements OnInit {
               private snack: MatSnackBar,
               private router: Router) {
     this.loginForm = fb.group({
-      email: '',
-      password: ''
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.min(6)]]
     });
     this.signupForm = fb.group({
-      email: '',
-      password: '',
-      password2: ''
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.min(6)]],
+      password2: ['', [Validators.required, matchPasswordValidator()]]
     });
   }
 
@@ -85,6 +86,28 @@ export class LoginComponent implements OnInit {
           duration: 4000
         });
       });
+  }
+
+  // fg 1 = signUpForm
+  // default fg = signInForm
+  fcErr(fg: number, fc: string, ec: string, pre: string[]): boolean {
+    let currentFG: FormGroup;
+
+    switch (fg) {
+      case 1:
+        currentFG = this.signupForm;
+        break;
+      default:
+        currentFG = this.loginForm;
+    }
+    if (pre && pre.length > 0) {
+      for (let i = 0; i < pre.length; i++) {
+        if (currentFG.get(fc).hasError(pre[i])) {
+          return false;
+        }
+      }
+    }
+    return currentFG.get(fc).hasError(ec);
   }
 
 }

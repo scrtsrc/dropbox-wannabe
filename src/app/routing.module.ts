@@ -6,13 +6,14 @@ import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { FileSystemComponent } from './home/file-system/file-system.component';
 import { AuthModule } from './auth/auth.module';
-import { AuthGuard } from './auth/shared/auth-guard.service';
+import { AuthGuardService } from './auth/shared/auth-guard.service';
+import { LoggedInGuard } from './auth/shared/logged-in.guard';
 
 const routes: Routes = [
-  {path: 'albums', component: AlbumsListComponent, canActivate: [AuthGuard]},
-  {path: 'landing', component: LoginComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'file-system', component: FileSystemComponent},
+  {path: 'albums', component: AlbumsListComponent, canActivate: [AuthGuardService]},
+  {path: 'landing', component: LoginComponent, canActivate: [LoggedInGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [LoggedInGuard]},
+  {path: 'file-system', component: FileSystemComponent, canActivate: [LoggedInGuard]},
   {path: '', redirectTo: '/landing', pathMatch: 'full'},
   {path: '**', redirectTo: '/landing'},
 ];
