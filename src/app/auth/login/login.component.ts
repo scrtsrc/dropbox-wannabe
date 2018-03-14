@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { matchPasswordValidator } from '../shared/password.validator';
+import { User } from '../../user/user';
 
 
 @Component({
@@ -71,8 +72,8 @@ export class LoginComponent implements OnInit {
   }
 
   signUp() {
-    const signUpModel = this.signupForm.value;
-    this.authServ.signUp(signUpModel.email, signUpModel.password)
+    const signUpUserModel = this.signupForm.value as User;
+    this.authServ.signUp(signUpUserModel)
       .then(() => {
         this.router.navigateByUrl('albums')
           .then(() =>
@@ -90,7 +91,7 @@ export class LoginComponent implements OnInit {
 
   // fg 1 = signUpForm
   // default fg = signInForm
-  fcErr(fg: number, fc: string, ec: string, pre: string[]): boolean {
+  fcErr(fg: number, fc: string, ec: string, pre?: string[]): boolean {
     let currentFG: FormGroup;
 
     switch (fg) {

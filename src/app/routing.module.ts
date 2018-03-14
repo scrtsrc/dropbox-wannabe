@@ -8,21 +8,23 @@ import { FileSystemComponent } from './home/file-system/file-system.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuardService } from './auth/shared/auth-guard.service';
 import { LoggedInGuard } from './auth/shared/logged-in.guard';
+import { UserModule } from './user/user.module';
 
 const routes: Routes = [
   {path: 'albums', component: AlbumsListComponent, canActivate: [AuthGuardService]},
   {path: 'landing', component: LoginComponent, canActivate: [LoggedInGuard]},
-  {path: 'profile', component: ProfileComponent, canActivate: [LoggedInGuard]},
+  {path: 'profile', component: ProfileComponent, canActivate: [AuthGuardService]},
   {path: 'file-system', component: FileSystemComponent, canActivate: [LoggedInGuard]},
-  {path: '', redirectTo: '/landing', pathMatch: 'full'},
-  {path: '**', redirectTo: '/landing'},
+  {path: '', redirectTo: '/albums', pathMatch: 'full'},
+  {path: '**', redirectTo: '/albums'},
 ];
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
-    AuthModule
+    AuthModule,
+    UserModule
   ],
   declarations: [],
   exports: [RouterModule]

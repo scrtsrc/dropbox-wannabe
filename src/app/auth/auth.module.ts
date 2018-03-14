@@ -5,7 +5,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './shared/auth.service';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatSnackBarModule } from '@angular/material';
+import { MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule, MatSnackBarModule } from '@angular/material';
 import { AuthGuardService } from './shared/auth-guard.service';
 import { LoggedInGuard } from './shared/logged-in.guard';
 
@@ -19,7 +19,7 @@ import { LoggedInGuard } from './shared/logged-in.guard';
     MatInputModule,
     MatCardModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
   ],
   declarations: [LoginComponent],
   providers: [AuthService, AuthGuardService, LoggedInGuard]

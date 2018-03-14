@@ -1,3 +1,46 @@
-<p>
-  profile works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center" *ngIf="user">
+  <mat-card fxFlex="80">
+    <mat-card-header>
+      <img mat-card-avatar
+           src="https://firebasestorage.googleapis.com/v0/b/dropbox-wannabe-7098f.appspot.com/o/maxresdefault.jpg?alt=media&token=0fb478b9-67e5-4cb5-8840-b22f71edb225">
+      <mat-card-title>{{user.username}}</mat-card-title>
+      <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <form (ngSubmit)="save()" [formGroup]="profileForm" novalidate fxLayout="column">
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Username" formControlName="username">
+          <mat-error *ngIf="fcErr('username', 'required')">
+            Username is required
+          </mat-error>
+          <mat-error *ngIf="fcErr('username', 'minlength', ['required'])">
+            Username needs to be at least 4 characters
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="First Name" formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Middle Name" formControlName="middleName">
+        </mat-form-field>
+        <mat-form-field fxFlex>
+          <input matInput placeholder="Last Name" formControlName="lastName">
+        </mat-form-field>
+        <div fxLayout="row" fxLayoutAlign="stretch">
+          <button mat-mini-fab
+                  color="warn">
+            <mat-icon>lock</mat-icon>
+          </button>
+          <p fxFlex
+             fxFlexOffset="10px">Change password</p>
+          <button mat-raised-button
+                  color="primary"
+                  type="submit"
+                  [disabled]="profileForm.invalid || unchanged()">
+            Save
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
