@@ -1,23 +1,32 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { User } from '../user';
+import { User } from '../shared/user';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { UserService } from '../shared/user.service';
 import { Subscription } from 'rxjs/Subscription';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { FileService } from '../../file-system/shared/file.service';
 
 @Component({
   selector: 'dwa-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css'],
+  animations: [trigger('imageHover', [state('hoveringImage', style({opacity: 0.3})),
+    state('notHoveringImage', style({opacity: 1})),
+    transition('hoveringImage <=> notHoveringImage', animate('200ms ease-in'))])]
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   profileForm: FormGroup;
   user: User;
   userSub: Subscription;
+  isHovering: boolean;
+  img: string;
+  srcLoaded: boolean;
 
   constructor(private fb: FormBuilder,
               private snack: MatSnackBar,
-              private userServ: UserService) {
+              private userServ: UserService,
+              private fileServ: FileService) {
     this.profileForm = fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
       firstName: '',
@@ -26,9 +35,34 @@ export class ProfileComponent implements OnInit, OnDestroy {
     });
   }
 
+  uploadNewImage(fileList) {
+    if (fileList &&
+      fileList.length === 1 &&
+      ['image/jpeg', 'imge/png'].indexOf(fileList.item(0).type) > -1) {
+      this.srcLoaded = false;
+      const file = fileList.item[0];
+      const path = 'profile-image/' + this.user.uid;
+      this.fileServ.upload(path, file).downloadUrl.subscribe(url => {
+        this.img = url;
+        this.hovering(false);
+      });
+    } else {
+      this.snack.open('Only a single pgn or jpeg image can be used', null, {duration: 4000});
+      this.hovering(false);
+    }
+
+  }
+
   ngOnInit() {
-    this.userSub = this.userServ.getUser().subscribe(user => {
+    this.userSub = this.userServ.getUserWithProfileUrl().subscribe(user => {
+
       this.user = user;
+      if (this.user.img) {
+        this.img = user.profileImgUrl;
+      }
+      else {
+        this.img = '/assets/ic_tag_faces_black_24px.svg';
+      }
       this.profileForm.patchValue(user);
     });
   }
@@ -62,6 +96,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
     }
     return this.profileForm.get(fc).hasError(ec);
+  }
+
+  hovering(isHovering: boolean) {
+    this.isHovering = isHovering;
+
   }
 
 

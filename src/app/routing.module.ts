@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AlbumsListComponent } from './albums/albums-list/albums-list.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
-import { FileSystemComponent } from './home/file-system/file-system.component';
+import { FileSystemComponent } from './file-system/file-system/file-system.component';
 import { AuthModule } from './auth/auth.module';
 import { AuthGuardService } from './auth/shared/auth-guard.service';
 import { LoggedInGuard } from './auth/shared/logged-in.guard';

@@ -1,8 +1,20 @@
 <div fxLayout="row" fxLayoutAlign="center" *ngIf="user">
   <mat-card fxFlex="80">
     <mat-card-header>
-      <img mat-card-avatar
-           src="https://firebasestorage.googleapis.com/v0/b/dropbox-wannabe-7098f.appspot.com/o/maxresdefault.jpg?alt=media&token=0fb478b9-67e5-4cb5-8840-b22f71edb225">
+      <img
+        [hidden]="!srcLoaded"
+        matTooltip="Drop new image here or click me to select"
+        matTooltipPosition="above"
+        [@imageHover]="isHovering?'hoveringImage':'notHoveringImage'"
+        dwaUpload
+        (hovering)="hovering($event)"
+        (dropped)="uploadNewImage($event)"
+        mat-card-avatar
+        [src]="isHovering? '/assets/ic_cloud_upload_black_24px.svg':img"
+        (load)="srcLoaded = true">
+      <mat-spinner mat-card-avatar
+                   *ngIf="!srcLoaded"
+                   [diameter]="40"></mat-spinner>
       <mat-card-title>{{user.username}}</mat-card-title>
       <mat-card-subtitle>{{user.email}}</mat-card-subtitle>
     </mat-card-header>

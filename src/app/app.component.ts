@@ -82,7 +82,7 @@ export class AppComponent implements OnInit, OnDestroy {
           route.icon = 'face';
           break;
         default:
-          route.title = 'Home';
+          route.title = 'File-system';
           route.icon = 'home';
       }
       this.routes.push(route);
