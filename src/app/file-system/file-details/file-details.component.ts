@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { File } from '../shared/file';
 
 @Component({
   selector: 'dwa-file-details',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileDetailsComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  file: File;
+
+  @Input()
+  url: string;
+
+  constructor() {
+
+  }
 
   ngOnInit() {
+
   }
 
 }

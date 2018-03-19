@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { File } from '../shared/file';
 
 @Component({
   selector: 'dwa-file-system-container',
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileSystemContainerComponent implements OnInit {
 
-  constructor() { }
+  file: File;
+  url: string;
+
+  constructor() {
+    this.file = {
+      displayName: 'That time at that place',
+      fileName: 'Y_img.jpeg',
+      created: '10-10-2018',
+      mimeType: 'jpeg',
+      size: 2168316
+    };
+    this.url = 'https://material.angular.io/assets/img/examples/shiba2.jpg';
+  }
 
   ngOnInit() {
   }

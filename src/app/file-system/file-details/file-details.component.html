@@ -1,3 +1,26 @@
-<p>
-  file-details works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center">
+  <mat-card fxFlex="80" *ngIf="file">
+    <mat-card-header>
+      <mat-card-title>{{file.displayName}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div><img [style.max-width]="'100%'"
+                [src]="url"></div>
+      <mat-list dense
+      fxFlex="40"
+      fxFlexAlign="start"
+      fxFlexOffset="1">
+        <mat-list-item> Created: {{file.created}}</mat-list-item>
+        <mat-list-item> File Name: {{file.fileName}}</mat-list-item>
+        <mat-list-item> File Type: {{file.size/1000}} mb</mat-list-item>
+      </mat-list>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn">
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <div *ngIf="!file">Loading</div>
+</div>

@@ -4,4 +4,5 @@ export class File {
   mimeType: string;
   owner?: string;
   size: number;
+  displayName: string;
 }

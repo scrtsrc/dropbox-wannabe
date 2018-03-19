@@ -78,7 +78,7 @@ export class AppComponent implements OnInit, OnDestroy {
           route.icon = 'https';
           break;
         case 2:
-          route.title = 'Profigitle';
+          route.title = 'Profile';
           route.icon = 'face';
           break;
         default:
