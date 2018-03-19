@@ -40,9 +40,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       fileList.length === 1 &&
       ['image/jpeg', 'imge/png'].indexOf(fileList.item(0).type) > -1) {
       this.srcLoaded = false;
-      const file = fileList.item[0];
+      const file = fileList.item(0);
       const path = 'profile-image/' + this.user.uid;
       this.fileServ.upload(path, file).downloadUrl.subscribe(url => {
+        console.log(url);
         this.img = url;
         this.hovering(false);
       });
