@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material';
 import { UserService } from '../shared/user.service';
 import { Subscription } from 'rxjs/Subscription';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { FileService } from '../../file-system/shared/file.service';
+import { FileService } from '../../shared/files/file.service';
 
 @Component({
   selector: 'dwa-profile',
