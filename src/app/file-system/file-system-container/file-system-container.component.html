@@ -1,2 +1,5 @@
-<dwa-file-details [file]="file"
-                  [url]="url"></dwa-file-details>
+<div fxLayout="row">
+  <dwa-file-system-column [column]="column"
+                          *ngFor="let column of this.columns">
+  </dwa-file-system-column>
+</div>

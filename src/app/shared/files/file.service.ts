@@ -10,7 +10,6 @@ export class FileService {
   constructor(private afso: AngularFireStorage) { }
 
   upload (path: string, file: File): UploadTask {
-    console.log('file', file);
     const task = this.afso.upload(path, file);
     return  {
       downloadUrl: task.downloadURL()

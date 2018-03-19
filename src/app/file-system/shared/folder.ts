@@ -1,4 +1,4 @@
-export class Folder {
+export interface Folder {
   name: string;
   owner?: string;
   files?: [{

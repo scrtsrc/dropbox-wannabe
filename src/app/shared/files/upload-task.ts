@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-export class UploadTask {
+export interface UploadTask {
   downloadUrl?: Observable<string>;
 
 }

@@ -1,26 +1,37 @@
-<div fxLayout="row" fxLayoutAlign="center">
-  <mat-card fxFlex="80" *ngIf="file">
-    <mat-card-header>
-      <mat-card-title>{{file.displayName}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div><img [style.max-width]="'100%'"
-                [src]="url"></div>
-      <mat-list dense
-      fxFlex="40"
-      fxFlexAlign="start"
-      fxFlexOffset="1">
+<div fxLayout="column"
+     fxLayoutAlign="center"
+     fxFlexOffset="5"
+     [style.min-width]="'400px'"
+     *ngIf="file">
+  <h4>{{file.displayName}}</h4>
+  <div fxLayout="row">
+    <div>
+      <img (load)="srcLoaded = true"
+           [hidden]="!srcLoaded"
+           [style.max-width]="'100%'"
+           [src]="url">
+      <mat-spinner
+        [style.max-width]="'100%'"
+        *ngIf="!srcLoaded"></mat-spinner>
+    </div>
+    <mat-list dense
+              fxFlex="40"
+              fxFlexAlign="start"
+              fxFlexOffset="1">
+      <div>
         <mat-list-item> Created: {{file.created}}</mat-list-item>
-        <mat-list-item> File Name: {{file.fileName}}</mat-list-item>
-        <mat-list-item> File Type: {{file.size/1000}} mb</mat-list-item>
-      </mat-list>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="warn">
-        <mat-icon>delete</mat-icon>
-        Delete
-      </button>
-    </mat-card-actions>
-  </mat-card>
-  <div *ngIf="!file">Loading</div>
+        <mat-list-item> Filename: {{file.fileName}}</mat-list-item>
+        <mat-list-item> Size: {{file.size / 1000}} MB</mat-list-item>
+      </div>
+    </mat-list>
+  </div>
+  <button mat-raised-button
+          color="warn"
+          (click)="delete()"
+          fxFlexAlign="start"
+          fxFlexOffset="1">
+    <mat-icon>delete</mat-icon>
+    Delete
+  </button>
+  <div *ngIf="!file">Loading...</div>
 </div>

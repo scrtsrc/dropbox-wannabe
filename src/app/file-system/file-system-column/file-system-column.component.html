@@ -1,0 +1,14 @@
+<div fxLayout="column" fxFill>
+  <div fxFill>
+    <dwa-folder-details
+      [folders]="folderColumn.folders"
+      *ngIf="folderColumn"
+      [files]="folderColumn.files"
+      [displayName]="folderColumn.displayName"></dwa-folder-details>
+    <dwa-file-details
+      [file]="fileColumn.file"
+      [url]="fileColumn.url"
+      *ngIf="fileColumn"></dwa-file-details>
+  </div>
+
+</div>

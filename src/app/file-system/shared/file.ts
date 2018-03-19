@@ -1,4 +1,4 @@
-export class File {
+export interface File {
   created: string;
   fileName: string;
   mimeType: string;

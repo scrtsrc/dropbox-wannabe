@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { File } from '../shared/file';
 
 @Component({
@@ -10,9 +10,11 @@ export class FileDetailsComponent implements OnInit {
 
   @Input()
   file: File;
-
   @Input()
   url: string;
+  @Output()
+  imageDeleted = new EventEmitter<string>();
+  srcLoaded: boolean;
 
   constructor() {
 
@@ -20,6 +22,10 @@ export class FileDetailsComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  delete() {
+    this.imageDeleted.emit(this.url);
   }
 
 }
